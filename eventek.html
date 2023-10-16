@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- bekuldes -->
+    <form id="form">
+        <label>Test field: <input type="text" /></label>
+        <br /><br />
+        <button type="submit">Submit form</button>
+    </form>
+    <p id="log"></p>
+
+
+    <!-- 1.onchange -->
+    <p>Select a new car from the list.</p>
+
+    <select id="mySelect" onchange="myFunction()">
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Mercedes">Mercedes</option>
+        <option value="Volvo">Volvo</option>
+    </select>
+
+    <p>When you select a new car, a function is triggered which outputs the value of the selected car.</p>
+
+    <p id="demo"></p>
+
+    <!-- onclick -->
+    <h2>The ondblclick Event</h2>
+
+    <p ondblclick="myFunction()">Double-click this paragraph to trigger a function.</p>
+
+    <p id="demo"></p>
+
+    <!-- 2.onclick -->
+    szám1: 5 <br> szám2: 3 <p id="szoveg"></p>
+    <button id="gomb" onclick="osszead(5,3)" ondblclick="kivon(5,3)">Egy kattintással összead, kettővel kivon.</button>
+
+    <!-- onmouseover -->
+    <img onmouseover="bigImg(this)" onmouseout="normalImg(this)" border="0" src="smiley.gif" alt="Smiley" width="32"
+        height="32">
+
+    <p>The function bigImg() is triggered when the user moves the mouse pointer over the image.</p>
+    <p>The function normalImg() is triggered when the mouse pointer is moved out of the image.</p>
+
+    <!-- 2.onmouseover -->
+    <p>Húzd az egeret a gomra.</p>
+    <button onmouseover="rahuz(this)" onmouseout="lehuz(this)">Gomb</button>
+
+    <!-- oncopyevent -->
+    <h2>The oncopy Event</h2>
+
+    <input type="text" oncopy="myFunction()" value="Try to copy me">
+
+    <p id="demo"></p>
+
+    <!-- 2.oncopyevent -->
+    <p>Másold ki, illeszd be vagy vágd ki az alábbi szöveget.</p>
+    <input type="text" oncopy="masol()" onpaste="beilleszt()" oncut="kivag()" value="Szöveg...">
+
+    <p id="szoveg"></p>
+
+    <!-- onkey -->
+    <p>Nyomj le egy billentyűt a bevitelimezőben.</p>
+    <input type="text" onkeypress="billentyu()">
+
+    <p id="szoveg"></p>
+
+    <script>
+
+        //bekudles
+
+        function logSubmit(event) {
+            log.textContent = `Form Submitted! Timestamp: ${event.timeStamp}`;
+            event.preventDefault();
+        }
+
+        const form = document.getElementById("form");
+        const log = document.getElementById("log");
+        form.addEventListener("submit", logSubmit);
+
+        //onchange
+        function myFunction() {
+            var x = document.getElementById("mySelect").value;
+            document.getElementById("demo").innerHTML = "You selected: " + x;
+        }
+
+        //onclick
+        function myFunction() {
+            document.getElementById("demo").innerHTML += "Hello World ";
+        }
+
+        //onclick 2
+        function osszead(szam1, szam2) {
+            document.getElementById("szoveg").innerHTML = szam1 + szam2;
+        }
+
+        function kivon(szam1, szam2) {
+            document.getElementById("szoveg").innerHTML = szam1 - szam2;
+        }
+
+
+        //onmouse
+        function bigImg(x) {
+            x.style.height = "64px";
+            x.style.width = "64px";
+        }
+
+        function normalImg(x) {
+            x.style.height = "32px";
+            x.style.width = "32px";
+        }
+
+        //onmouse2
+        function rahuz(elem) {
+            elem.style.backgroundColor = "red";
+        }
+
+        function lehuz(elem) {
+            elem.style.backgroundColor = "yellow";
+        }
+
+        //oncopy
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "You copied text!"
+        }
+
+        //oncopy2
+        function masol() {
+            document.getElementById("szoveg").innerHTML = "Most kimásoltad a szöveget."
+        }
+
+        function beilleszt() {
+            document.getElementById("szoveg").innerHTML = "Most beillesztetted a szöveget."
+        }
+
+        function kivag() {
+            document.getElementById("szoveg").innerHTML = "Most kivágtad a szöveget."
+        }
+
+        //onkey
+        function billentyu() {
+            var szoveg = "";
+            document.getElementById("szoveg").innerHTML += "Leütöttél egy billentyűt.<br>";
+        }
+    </script>
+</body>
+
+</html>
