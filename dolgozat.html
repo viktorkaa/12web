@@ -9,21 +9,66 @@
   <script src="jquery.min.js"></script>
   <script src="popper.min.js"></script>
   <script src="bootstrap.min.js"></script>
-  
-  <title>Document</title>
+  <title>Dolgozat</title>ű
+  <style>
+    #kommentMegjelenito {
+      background-color: grey;
+      opacity: 0.3;
+      border-radius: 5px;
 
+    }
+  </style>
 </head>
 
-<body>
-  <select class="form-control form-control-lg">
-    <option>Large select</option>
-  </select>
-  <select class="form-control">
-    <option>Default select</option>
-  </select>
-  <select class="form-control form-control-sm">
-    <option>Small select</option>
-  </select>
+<body style="height: 100vh;">
+  <div class="container d-flex flex-column justify-content-center align-items-center h-100">
+    <h1 class="w3-jumbo">Vaníliás Krémes</h1>
+    <br>
+    <h4>Hozzávalók</h4>
+    <br>
+    <p>A tojásfehérjéket a cukorral, sóval felverjük kemény habbá,majd alisztet, a sütőport és a kókuszt
+      hozzákeverjük.
+      Egy kb 27 x 35 cm-es tepsibe sütőpapírt teszünk, beleöntjük a tésztát, és kb. közepes lángon (180 fokon),
+      légkeveréses sütőben 20 percig sütjük (nem szabad pirosra sütni, mert akkor kemény, rágós lesz a tészta).
+      A tojássárgákat a tejjel, a mandulaaromával és a pudingporral összekeverjük, és pudingot készítünk belőle.
+      Ha kihűlt a krém, akkor a margarint a cukorral, robotgép segítségével kikeverjük, hozzákeverjük a krémhez,
+      rákenjük a tészta tetejére, és megszórjuk a kókuszreszelékkel.
+      Hűtőben dermesztjük, majd szeleteljük.</p>
+    <h4>Hozzászólások</h4>
+    <form id="kommentForm">
+      <h4><label for="kommentSzovege">Hozzászólás:</label><br></h4>
+      <textarea class="form-control" id="kommentSzovege" rows="4" cols="50"></textarea><br>
+      <label>
+        <input type="checkbox" class="form-check-input" id="nemvagyokRobot"> Nem vagyok robot
+      </label><br><br>
+      <button class="btn btn-warning" type="submit">Hozzáadás</button>
+    </form>
+    <br>
+    <div id="kommentMegjelenito"></div>
+
+    <script>
+      document.getElementById('kommentForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const kommentSzovege = document.getElementById('kommentSzovege').value;
+        const nemvagyokRobot = document.getElementById('nemvagyokRobot');
+
+        if (nemvagyokRobot.checked) {
+          const kommentMegjelenito = document.getElementById('kommentMegjelenito');
+          const ujKomment = document.createElement('div');
+          ujKomment.classList.add('komment');
+
+          const datum = new Date().toISOString().slice(0, 19).replace('T', ' ');
+          ujKomment.innerText = `${datum}: ${kommentSzovege}`;
+
+          kommentMegjelenito.appendChild(ujKomment);
+
+          document.getElementById('kommentSzovege').value = '';
+        } else {
+          alert('A "Nem vagyok robot" mezőt is ki kell tölteni!');
+        }
+      });
+    </script>
 </body>
 
 </html>
