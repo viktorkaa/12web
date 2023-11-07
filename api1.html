@@ -8,21 +8,38 @@
     <script src="popper.min.js"></script>
     <script src="bootstrap.min.js"></script>
     <title>Document</title>
-
-
+<style>
+    img {
+        max-width: 500px;
+        max-height: 500px;
+        display: block;
+    }
+</style>
 </head>
 
 <body>
-    <div class="container d-flex flex-column justify-content-center align-items-center h-100">
+<div class="container d-flex flex-column justify-content-center align-items-center h-100">
     <input class="form-control" placeholder="Ajd meg országot vagy várost" type="text" id="city">
     <br>
     <button class="btn btn-dark" id="getTemp">Hőmérséklet keresése</button>
+    <br>
     <h1 id="temp"></h1>
+    <button class="btn btn-dark" id="getCat">Új kép</button>
+    <br>
+    <img id="cat">
+    <button class="btn btn-dark" id="randomPerson">Random ember</button>
+    <br>
+    <h1 id="person"></h1>
 
     <script>
         const apiAddr = "https://wttr.in/"
+        const catApiAddr = "https://api.thecatapi.com/v1/images/search"
         const cityInput = document.getElementById("city")
         const btn = document.getElementById("getTemp")
+        const catImg = document.getElementById("cat")
+        const catBtn = document.getElementById("getCat")
+        const personBtn = document.getElementById("randomPerson")
+        const personOut = document.getElementById("person")
 
         const xhr = new XMLHttpRequest()
 
@@ -32,12 +49,37 @@
 
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    document.getElementById("temp").textContent = cityInput.value + " hőmérséklete: " + xhr.responseText + "🌡️"
+                    document.getElementById("temp").textContent = cityInput.value + " hőmérséklete: " + xhr.responseText + "🌡️";
                 } else {
-                    document.getElementById("temp").textContent = "Hiba történt sajnos " + xhr.status
+                    document.getElementById("temp").textContent = "Hiba!" + xhr.status
                 }
             }
+            xhr.send()
+        })
 
+        catBtn.addEventListener("click", function () {
+            xhr.open("GET", catApiAddr, true)
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let resp = JSON.parse(xhr.response)
+                    catImg.src = resp[0].url
+                }
+            }
+            xhr.send()
+        })
+
+        personBtn.addEventListener("click", function () {
+            xhr.open("GET", "https://randomuser.me/api/", true)
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let resp = JSON.parse(xhr.response)
+                    let person = resp.results[0]
+
+                    let outputString = "Neme: " + person.gender + ", Név: " + person.name.last + " " + person.name.first + ", E-mail: " + person.email
+
+                    personOut.textContent = outputString
+                }
+            }
             xhr.send()
         })
     </script>
