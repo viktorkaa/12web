@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <title>Document</title>
+
+
+</head>
+
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center h-100">
+    <input class="form-control" placeholder="Ajd meg országot vagy várost" type="text" id="city">
+    <br>
+    <button class="btn btn-dark" id="getTemp">Hőmérséklet keresése</button>
+    <h1 id="temp"></h1>
+
+    <script>
+        const apiAddr = "https://wttr.in/"
+        const cityInput = document.getElementById("city")
+        const btn = document.getElementById("getTemp")
+
+        const xhr = new XMLHttpRequest()
+
+        btn.addEventListener("click", function () {
+            console.log("kys")
+            xhr.open("GET", (apiAddr + cityInput.value + "?format=%t"), true)
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("temp").textContent = cityInput.value + " hőmérséklete: " + xhr.responseText + "🌡️"
+                } else {
+                    document.getElementById("temp").textContent = "Hiba történt sajnos " + xhr.status
+                }
+            }
+
+            xhr.send()
+        })
+    </script>
+</body>
+
+</html>
