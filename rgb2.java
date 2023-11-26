@@ -60,7 +60,7 @@ public class KepFeldolgozas {
         } catch (FileNotFoundException e) {
             System.out.println("A fájl nem található.");
         } catch (IOException e) {
-            System.out.println("Hiba az olvasás során.");
+            System.out.println("Hibaa az olvasás során.");
         }
     }
 }

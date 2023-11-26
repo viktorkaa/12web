@@ -51,7 +51,7 @@ public class Szalag {
         } catch (FileNotFoundException e) {
             System.out.println("A fájl nem található.");
         } catch (IOException e) {
-            System.out.println("Hiba az adatok olvasása közben.");
+            System.out.println("Hibaa az adatok olvasása közben.");
         }
     }
 }
