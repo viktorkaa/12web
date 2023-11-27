@@ -3,15 +3,8 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Leon
- */
 public class tantargyfelosztas {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
        RandomAccessFile raf;
        String sor;

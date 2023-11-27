@@ -53,6 +53,7 @@ public class Kepkezeles {
         System.out.println("A képen " + vilagosPontok + " világos képpont van.");
     }
 
+    
     private static void megkeresLegsotetebbPontokat() {
         int minOsszeg = Integer.MAX_VALUE;
         ArrayList<int[]> legsotetebbPontok = new ArrayList<>();
