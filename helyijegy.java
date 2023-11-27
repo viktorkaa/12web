@@ -16,24 +16,6 @@ public class BuszJegyek {
             fajl.close();
         } catch (IOException e) {
             System.out.println("Hiba történt az állomány olvasása közben.");
-            // Ha hiba történik az állomány olvasása közben, az első 10 sorral dolgozunk
-            String[] alapAdatok = {
-                "1 100",
-                "2 150",
-                "3 200",
-                "4 120",
-                "5 180",
-                "6 250",
-                "7 300",
-                "8 210",
-                "9 180",
-                "10 220"
-            };
-            for (String sor : alapAdatok) {
-                adatok.add(sor);
-            }
-        }
-
         // 2. feladat: Legutolsó jegyvásárló ülésének sorszáma és az általa beutazott távolság
         if (!adatok.isEmpty()) {
             String[] utolsoJegy = adatok.get(adatok.size() - 1).split(" ");
